@@ -125,13 +125,13 @@ void loop() {
     if(t.hour == 4)
         if(t.min >= 10 && t.min < 20 )          
           analogWrite(A2,255);
-          delay(400);
+          delay(50);
     }
     
     {//下午闹钟
       if(t.hour == 14)
         if( t.min >= 20 && t.min < 25 )         
           analogWrite(A2,255);
-          delay(400);
+          delay(50);
     }
 }
