@@ -6,7 +6,6 @@ Time  t;
 #include <FastLED.h>
 #define NUM_LEDS 16
 #define DATA_PIN 2
-#define Clock_PIN 12
 CRGB leds[NUM_LEDS];
 
 int Sen_Pin = A7;
@@ -24,7 +23,6 @@ U8G2_SSD1306_128X64_NONAME_1_SW_I2C u8g2(U8G2_R0,SCL,SDA,U8X8_PIN_NONE);
 void setup() { 
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
-  pinMode(Clock_PIN, INPUT);
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
@@ -115,7 +113,7 @@ void loop() {
     }
     while ( u8g2.nextPage() );
   }
-    int x = t.min;
+    
     int Clock_Beat = beatsin8(10, 0, 255);
     InPut_Pin = analogRead(Sen_Pin)/4;
     FastLED.setBrightness(InPut_Pin);
@@ -125,16 +123,14 @@ void loop() {
     
     {//早上闹钟
     if(t.hour == 4)
-        if(x >= 10 && x < 20 )
-          if( Clock_PIN == 0)
+        if(t.min >= 10 && t.min < 20 )          
           analogWrite(A2,255);
           delay(400);
     }
     
     {//下午闹钟
-      if(t.hour == 15)
-        if( x >= 50 && x < 55 )
-          if( Clock_PIN == 0)
+      if(t.hour == 14)
+        if( t.min >= 20 && t.min < 25 )         
           analogWrite(A2,255);
           delay(400);
     }
